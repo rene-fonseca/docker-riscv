@@ -1,7 +1,7 @@
 FROM ubuntu:18.04
 
 RUN apt-get update -y \
-  && apt-get -y install git make python3 pkg-config gcc \
+  && apt-get -y install git make gcc python3 pkg-config libglib2.0-dev libpixman-1-dev \
   && rm -rf /var/lib/apt/lists/* \
   && cd /tmp \
   && git clone https://git.qemu.org/git/qemu.git \
@@ -11,4 +11,4 @@ RUN apt-get update -y \
   && make install \
   && cd / \
   && rm -rf /tmp/qemu \
-  && apt-get -y remove git make python3 gcc pkg-config
+  && apt-get -y remove git make gcc python3 pkg-config
