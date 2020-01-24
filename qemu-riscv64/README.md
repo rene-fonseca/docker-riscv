@@ -20,6 +20,12 @@ docker run -it renefonseca/qemu-riscv64:latest bash
 qemu-riscv64 MYEXE
 ```
 
+Run the emulator non-interactively:
+```
+docker run renefonseca/qemu-riscv64:latest qemu-riscv64 MYEXE
+echo $?
+```
+
 You can build for RISC-V using the GCC cross compiler tool chain like below:
 ```
 docker run -it renefonseca/qemu-riscv64:latest bash
