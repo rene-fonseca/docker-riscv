@@ -16,4 +16,5 @@ This should build *renefonseca/qemu-riscv32:latest*.
 
 ```
 docker run -it renefonseca/qemu-riscv32:latest bash
+qemu-riscv32 MYEXE
 ```
