@@ -16,11 +16,11 @@ This should build *renefonseca/qemu-riscv32:latest*.
 
 ```
 docker run -it renefonseca/qemu-riscv32:latest bash
-qemu-riscv32 -L /usr/riscv64-linux-gnu/ MYEXE
+qemu-riscv32 -L /usr/riscv32-linux-gnu/ MYEXE
 ```
 
 Run the emulator non-interactively:
 ```
-docker run renefonseca/qemu-riscv32:latest qemu-riscv32 -L /usr/riscv64-linux-gnu/ MYEXE
+docker run renefonseca/qemu-riscv32:latest qemu-riscv32 -L /usr/riscv32-linux-gnu/ MYEXE
 echo $?
 ```
