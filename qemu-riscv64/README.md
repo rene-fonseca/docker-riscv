@@ -17,12 +17,12 @@ This should build *renefonseca/qemu-riscv64:latest*.
 Run the emulator:
 ```
 docker run -it renefonseca/qemu-riscv64:latest bash
-qemu-riscv64 MYEXE
+qemu-riscv64 -L /usr/riscv64-linux-gnu/ MYEXE
 ```
 
 Run the emulator non-interactively:
 ```
-docker run renefonseca/qemu-riscv64:latest qemu-riscv64 MYEXE
+docker run renefonseca/qemu-riscv64:latest qemu-riscv64 -L /usr/riscv64-linux-gnu/ MYEXE
 echo $?
 ```
 
@@ -42,3 +42,41 @@ cd build
 cmake .. -DCMAKE_CXX_COMPILER=/usr/bin/riscv64-linux-gnu-g++-8 -DCMAKE_C_COMPILER=/usr/bin/riscv64-linux-gnu-gcc-8
 cmake --build . --target install
 ```
+
+
+## Azure DevOps Pipeline
+
+You can run your tests in an Azure pipeline. Job snippet using *cmake*:
+
+```
+resources:
+  containers:
+  - container: riscv64
+    image: <YOUR IMAGE BASED ON renefonseca/qemu-riscv64:latest BUT WITH BUILD TOOLS ADDED>
+
+- job: ubuntu_riscv64
+  pool:
+    vmImage: 'ubuntu-18.04'
+  container: riscv64
+  steps:
+  - script: |
+      echo "qemu-riscv64 -L /usr/riscv64-linux-gnu/ \"\$@\"" > run.sh
+      chmod +x run.sh
+      cmake $(Build.SourcesDirectory) -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=install --DCMAKE_CXX_COMPILER=/usr/bin/riscv64-linux-gnu-g++-8 -DCMAKE_C_COMPILER=/usr/bin/riscv64-linux-gnu-gcc-8
+    displayName: 'Config'
+    workingDirectory: $(Build.BinariesDirectory)
+
+  - script: cmake --build . --config Debug --target install -- -j 4
+    displayName: 'Build'
+    workingDirectory: $(Build.BinariesDirectory)
+
+  - task: CmdLine@2
+    displayName: 'Run tests'
+    continueOnError: true
+    inputs:
+      script: |
+        ./run.sh MYTESTAPP
+      workingDirectory: $(Build.BinariesDirectory)
+```
+
+Note that, tou need to add support for the interpreter "qemu-riscv64 -L /usr/riscv64-linux-gnu/" prefix in your CMakeLists.txt if you want to run using *ctest*.
