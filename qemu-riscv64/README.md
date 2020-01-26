@@ -32,7 +32,7 @@ docker run -it renefonseca/qemu-riscv64:latest bash
 apt-get update
 apt-get install git cmake make gcc-8-riscv64-linux-gnu g++-8-riscv64-linux-gnu
 riscv64-linux-gnu-g++-8 MYSOURCE -o MYAPP
-qemu-riscv64 MYAPP
+qemu-riscv64 -L /usr/riscv64-linux-gnu/ MYAPP
 ```
 
 Once installed, you can use the cross compiler tool chain with *cmake*:
