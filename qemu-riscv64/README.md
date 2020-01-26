@@ -79,4 +79,4 @@ resources:
       workingDirectory: $(Build.BinariesDirectory)
 ```
 
-Note that, tou need to add support for the interpreter "qemu-riscv64 -L /usr/riscv64-linux-gnu/" prefix in your *CMakeLists.txt* if you want to run using *ctest*.
+Note that, you need to add support for the interpreter "qemu-riscv64 -L /usr/riscv64-linux-gnu/" prefix in your *CMakeLists.txt* if you want to run using *ctest*.
