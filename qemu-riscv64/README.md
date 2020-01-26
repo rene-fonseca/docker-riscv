@@ -62,7 +62,7 @@ resources:
   - script: |
       echo "qemu-riscv64 -L /usr/riscv64-linux-gnu/ \"\$@\"" > run.sh
       chmod +x run.sh
-      cmake $(Build.SourcesDirectory) -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=install --DCMAKE_CXX_COMPILER=/usr/bin/riscv64-linux-gnu-g++-8 -DCMAKE_C_COMPILER=/usr/bin/riscv64-linux-gnu-gcc-8
+      cmake $(Build.SourcesDirectory) -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=install -DCMAKE_CXX_COMPILER=/usr/bin/riscv64-linux-gnu-g++-8 -DCMAKE_C_COMPILER=/usr/bin/riscv64-linux-gnu-gcc-8
     displayName: 'Config'
     workingDirectory: $(Build.BinariesDirectory)
 
