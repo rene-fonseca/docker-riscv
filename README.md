@@ -1,6 +1,6 @@
 # Docker images for RISC-V
 
-This repo provides scripts for building Docker images for the RISCV architecture.
+This repo provides scripts for building Docker images for the RISC-V architecture.
 
 Projects                  | Folder
 ------------------------- | --------
