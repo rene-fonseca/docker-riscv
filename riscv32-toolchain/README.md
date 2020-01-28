@@ -36,6 +36,17 @@ riscv32-unknown-linux-gnu-g++ MYSOURCE -o MYAPP
 qemu-riscv32.sh MYAPP
 ```
 
+The image includes a simple *hello* example:
+```
+docker run renefonseca/riscv32-toolchain:latest qemu-riscv32 -L /riscv32/sysroot /riscv32/bin/hello
+echo $?
+```
+
+You will get this output if everything works properly:
+```
+Hello from RISC-V 32-bit
+```
+
 Once installed, you can use the cross compiler tool chain with *cmake*:
 ```
 mkdir build
